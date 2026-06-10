@@ -1,686 +1,717 @@
 /* ==========================================================================
-   PROJETO AGRINHO 2026 - ENSINO MÉDIO
-   TEMA: MST (MOVIMENTO DOS TRABALHADORES RURAIS SEM TERRA)
-   ESTÉTICA: COQUETTE (PASTEL, ROMÂNTICO, VINTAGE, LAÇOS E RENDAS)
-   ARQUIVO: style.css (FOLHA DE ESTILO COMPLETA E DETALHADA)
+   AGRINHO 2026 - CATEGORIA: DESENVOLVIMENTO FRONT-END
+   PROJETO: Semeando Amor e Terra: MST e a Agricultura Familiar
+   ESTÉTICA: Coquette (Tons pastéis, laços, romantismo e delicadeza)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. IMPORTAÇÃO DE FONTES (GOOGLE FONTS)
-   - Playfair Display: Para títulos elegantes, clássicos e com serifa.
-   - Montserrat: Para textos de leitura limpos, delicados e modernos.
-   -------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-
-/* --------------------------------------------------------------------------
-   2. VARIÁVEIS GLOBAIS (CSS ROOT VARIABLES)
-   Definição da paleta de cores Coquette adaptada com toques sutis de campo.
+   1. VARIÁVEIS DO SISTEMA DE DESIGN (TOKENS)
    -------------------------------------------------------------------------- */
 :root {
-    /* Cores Coquette Principais */
-    --coquette-pink-light: #fff0f3;
-    --coquette-pink-main: #ffccd5;
-    --coquette-pink-dark: #ffb3c1;
-    --coquette-rose-deep: #ff85a1;
-    --coquette-blush: #fbb1bd;
+    /* Paleta de Cores Coquette (Rosas e Cremes) */
+    --cor-rosa-principal: #ffb6c1;       /* Rosa Claro Clássico */
+    --cor-rosa-suve: #fff0f5;            /* Lavender Blush (Fundo ultra claro) */
+    --cor-rosa-escuro: #db7093;          /* Pale Violet Red (Para destaques e textos) */
+    --cor-rosa-pastel: #ffe4e1;          /* Misty Rose */
+    --cor-creme-fundo: #fffdf9;          /* Off-white quente e acolhedor */
     
-    /* Cores de Destaque Vintage/Clássicas */
-    --coquette-cream: #fffbf7;
-    --coquette-gold: #e6c280;
-    --coquette-white: #ffffff;
-    
-    /* Adaptação Sutil para o Tema do Campo (Verdes Pastéis) */
-    --mst-green-pastel: #e8f5e9;
-    --mst-green-soft: #c8e6c9;
-    --mst-green-olive: #81c784;
-    
-    /* Cores de Texto e Contraste */
-    --text-primary: #4a3538;
-    --text-secondary: #6b4e52;
-    --text-light: #8c6d71;
-    --border-color-soft: #f7d6db;
+    /* Paleta de Cores MST / Agricultura (Tons de Verde e Terra) */
+    --cor-verde-mst: #2d6a4f;            /* Verde Escuro Clássico do Movimento */
+    --cor-verde-claro: #d8f3dc;          /* Verde Pastel para harmonia */
+    --cor-verde-folha: #52b788;          /* Verde vivo para elementos ativos */
+    --cor-terra-suave: #b5838d;          /* Tom de terra rosado para links e detalhes */
     
     /* Tipografia */
-    --font-title: 'Playfair Display', Georgia, serif;
-    --font-body: 'Montserrat', Helvetica, Arial, sans-serif;
+    --fonte-titulos: 'Georgia', serif;
+    --fonte-corpo: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
-    /* Efeitos e Transições */
-    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.2s ease-in-out;
-    --main-shadow: 0 8px 24px rgba(255, 179, 193, 0.2);
-    --hover-shadow: 0 12px 32px rgba(255, 133, 161, 0.3);
-    --inset-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    /* Sombras e Bordas */
+    --sombra-suave: 0 4px 15px rgba(255, 182, 193, 0.2);
+    --sombra-card: 0 8px 25px rgba(74, 44, 42, 0.06);
+    --borda-raio-g: 24px;
+    --borda-raio-m: 16px;
+    --borda-raio-p: 8px;
     
-    /* Espaçamentos e Bordas */
-    --radius-small: 8px;
-    --radius-medium: 15px;
-    --radius-large: 30px;
-    --border-coquette: 2px double #ffb3c1;
+    /* Transições */
+    --transicao-suave: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* --------------------------------------------------------------------------
-   3. RESET CSS E CONFIGURAÇÕES DE BASE
-   Garante consistência visual entre diferentes navegadores.
+   2. RESET DE ESTILOS E CONFIGURAÇÕES GERAIS
    -------------------------------------------------------------------------- */
-*,
-*::before,
-*::after {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    outline: none;
 }
 
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    background-color: var(--coquette-pink-light);
+    background-color: var(--cor-creme-fundo);
 }
 
 body {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 1.8;
-    color: var(--text-primary);
-    background-image: radial-gradient(var(--coquette-pink-main) 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-color: var(--coquette-pink-light);
+    font-family: var(--fonte-corpo);
+    color: #4a2c2a; /* Marrom escuro suave em vez de preto puro (Mais Coquette) */
+    line-height: 1.7;
     overflow-x: hidden;
-    padding: 0;
-    margin: 0;
+    background-color: var(--cor-creme-fundo);
 }
 
-/* --------------------------------------------------------------------------
-   4. CUSTOMIZAÇÃO DA BARRA DE ROLAGEM (SCROLLBAR)
-   Barra de rolagem delicada em tons de rosa pastel.
-   -------------------------------------------------------------------------- */
+/* Customização da Barra de Rolagem (Scrollbar Fofa) */
 ::-webkit-scrollbar {
     width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--coquette-pink-light);
-    border-left: 1px solid var(--border-color-soft);
+    background: var(--cor-rosa-suve);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--coquette-pink-dark);
-    border-radius: var(--radius-medium);
-    border: 3px solid var(--coquette-pink-light);
+    background-color: var(--cor-rosa-principal);
+    border-radius: 6px;
+    border: 3px solid var(--cor-rosa-suve);
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--coquette-rose-deep);
-}
-
-/* --------------------------------------------------------------------------
-   5. SELEÇÃO DE TEXTO CUSTOMIZADA
-   -------------------------------------------------------------------------- */
+/* Seleção de Texto Personalizada */
 ::selection {
-    background-color: var(--coquette-pink-main);
-    color: var(--text-primary);
+    background-color: var(--cor-rosa-principal);
+    color: white;
 }
 
 /* --------------------------------------------------------------------------
-   6. ESTRUTURAS DE LAYOUT E CONTAINERS
+   3. TIPOGRAFIA E ELEMENTOS DE TEXTO
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4 {
+    font-family: var(--fonte-titulos);
+    color: var(--cor-verde-mst);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    text-align: justify;
+}
+
+strong {
+    color: var(--cor-rosa-escuro);
+    font-weight: 600;
+}
+
+/* Subtítulos Padronizados */
+.subtitulo {
+    text-align: center;
+    font-style: italic;
+    color: var(--cor-terra-suave);
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.15rem;
+}
+
+/* --------------------------------------------------------------------------
+   4. ESTRUTURA DE LAYOUT E CONTAINERS
    -------------------------------------------------------------------------- */
 .container {
     width: 100%;
-    max-width: 1140px;
-    margin-right: auto;
+    max-width: 1200px;
     margin-left: auto;
-    padding-right: 25px;
-    padding-left: 25px;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
-/* --------------------------------------------------------------------------
-   7. CABEÇALHO PRINCIPAL (#main-header)
-   Estilo romântico, centralizado, simulando uma carta ou diário vintage.
-   -------------------------------------------------------------------------- */
-#main-header {
-    background-color: var(--coquette-white);
-    padding: 60px 0 0 0;
-    text-align: center;
-    border-bottom: 3px double var(--coquette-pink-dark);
-    box-shadow: 0 4px 15px rgba(255, 204, 213, 0.3);
+.secao-conteudo {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
     position: relative;
 }
 
-#main-header::before {
-    content: "✿ ♛ ✿";
-    display: block;
-    font-size: 1.5rem;
-    color: var(--coquette-rose-deep);
-    margin-bottom: 15px;
-    letter-spacing: 5px;
+.fundo-alternativo {
+    background-color: var(--cor-rosa-suve);
+    border-top: 3px dashed var(--cor-rosa-pastel);
+    border-bottom: 3px dashed var(--cor-rosa-pastel);
 }
 
-#main-header h1 {
-    font-family: var(--font-title);
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-    letter-spacing: -0.5px;
-    text-shadow: 2px 2px 0px var(--coquette-pink-light);
-    padding: 0 15px;
-}
-
-#main-header .subtitle {
-    font-family: var(--font-title);
-    font-style: italic;
-    font-size: 1.3rem;
-    color: var(--text-secondary);
-    margin-bottom: 40px;
-    font-weight: 400;
-}
-
-/* --------------------------------------------------------------------------
-   8. MENU DE NAVEGAÇÃO (#main-nav)
-   Menu fixo ou integrado com links delicados e efeitos de laço/fita sublinhada.
-   -------------------------------------------------------------------------- */
-#main-nav {
-    background-color: var(--coquette-cream);
-    border-top: 1px dashed var(--coquette-pink-dark);
-    padding: 15px 0;
-}
-
-#main-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
+/* Grade de Conteúdo Genérica */
+.grade-conteudo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
 }
 
-#main-nav ul li {
-    position: relative;
+/* --------------------------------------------------------------------------
+   5. CABEÇALHO E NAVEGAÇÃO (HEADER COQUETTE)
+   -------------------------------------------------------------------------- */
+.header-coquette {
+    background-color: rgba(255, 253, 249, 0.95);
+    border-bottom: 2px solid var(--cor-rosa-pastel);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(255, 182, 193, 0.1);
 }
 
-#main-nav ul li a {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    text-decoration: none;
-    text-transform: uppercase;
+.header-coquette .logo span {
+    font-family: var(--fonte-titulos);
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--cor-rosa-escuro);
     letter-spacing: 1px;
-    padding: 8px 16px;
-    display: inline-block;
-    transition: var(--transition-fast);
+    text-shadow: 1px 1px 0px var(--cor-rosa-pastel);
 }
 
-#main-nav ul li a:hover {
-    color: var(--coquette-rose-deep);
-    transform: translateY(-2px);
+.header-coquette nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
 }
 
-#main-nav ul li a::after {
-    content: 'ʚɞ';
-    font-size: 0.8rem;
+.header-coquette nav ul li a {
+    text-decoration: none;
+    color: var(--cor-verde-mst);
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 0.3rem;
+    transition: var(--transicao-suave);
+}
+
+/* Animação do Link da Navegação */
+.header-coquette nav ul li a::after {
+    content: '🎀';
     position: absolute;
-    bottom: -12px;
+    bottom: -15px;
     left: 50%;
     transform: translateX(-50%) scale(0);
-    color: var(--coquette-rose-deep);
-    transition: var(--transition-fast);
+    font-size: 0.7rem;
+    transition: var(--transicao-suave);
 }
 
-#main-nav ul li a:hover::after {
-    transform: translateX(-50%) scale(1);
+.header-coquette nav ul li a:hover {
+    color: var(--cor-rosa-escuro);
+}
+
+.header-coquette nav ul li a:hover::after {
+    transform: translateX(-50%) scale(1.3);
 }
 
 /* --------------------------------------------------------------------------
-   9. ELEMENTOS DE CONTEÚDO GERAIS (MAIN, SECTION, REGRAS)
+   6. SEÇÃO PRINCIPAL (HERO SECTION)
    -------------------------------------------------------------------------- */
-main.container {
-    margin-top: 50px;
-    margin-bottom: 80px;
-}
-
-.content-section {
-    background-color: var(--coquette-white);
-    padding: 50px;
-    border-radius: var(--radius-large);
-    box-shadow: var(--main-shadow);
-    border: 1px solid rgba(255, 204, 213, 0.5);
-    margin-bottom: 40px;
+.hero-section {
+    background: linear-gradient(135deg, var(--cor-rosa-suve) 0%, #fffdf9 100%);
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     position: relative;
-    overflow: hidden;
-    transition: var(--transition-slow);
+    padding: 4rem 2rem;
 }
 
-.content-section:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow);
-}
-
-/* Detalhe de fita decorativa nos cantos das seções */
-.content-section::before {
-    content: "";
+/* Elemento decorativo de fundo para o Hero */
+.hero-section::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, var(--coquette-pink-main), var(--coquette-rose-deep), var(--coquette-pink-main));
+    height: 100%;
+    background-image: radial-gradient(var(--cor-rosa-pastel) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.4;
+    pointer-events: none;
 }
 
-/* Estilização de Títulos de Seção */
-.content-section h2 {
-    font-family: var(--font-title);
-    font-size: 2.2rem;
-    color: var(--text-primary);
-    margin-bottom: 25px;
-    position: relative;
+.hero-conteudo {
+    max-width: 850px;
+    z-index: 2;
+    animation: fadeIn Suave 1.2s ease-out;
+}
+
+.badge-fofa {
+    background-color: var(--cor-verde-claro);
+    color: var(--cor-verde-mst);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
     display: inline-block;
+    margin-bottom: 1.5rem;
+    border: 1.5px solid var(--cor-verde-folha);
+    box-shadow: var(--sombra-suave);
 }
 
-.content-section h2::after {
-    content: "";
-    display: block;
-    width: 60%;
-    height: 2px;
-    background-color: var(--coquette-pink-dark);
-    margin-top: 8px;
-    border-radius: 2px;
+.hero-section h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    color: var(--cor-verde-mst);
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 0px var(--cor-rosa-suve);
 }
 
-.content-section h3 {
-    font-family: var(--font-title);
+.hero-section p {
+    font-size: 1.25rem;
+    color: #5c403c;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Botão Estilo Coquette */
+.btn-coquette {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: var(--cor-rosa-escuro);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem 2.5rem;
+    border-radius: var(--borda-raio-g);
+    box-shadow: 0 6px 20px rgba(219, 112, 147, 0.4);
+    transition: var(--transicao-suave);
+    border: 2px solid transparent;
+}
+
+.btn-coquette span {
+    animation: balancoLaco 2s infinite ease-in-out;
+}
+
+.btn-coquette:hover {
+    background-color: white;
+    color: var(--cor-rosa-escuro);
+    border-color: var(--cor-rosa-escuro);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(219, 112, 147, 0.2);
+}
+
+.btn-coquette:active {
+    transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   7. DIVISORES ESTILIZADOS (LACE & FITAS)
+   -------------------------------------------------------------------------- */
+.divisor-fita {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--cor-rosa-escuro);
     font-size: 1.5rem;
-    color: var(--text-secondary);
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-
-.content-section p {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    text-align: justify;
-}
-
-.content-section p strong {
-    color: var(--text-primary);
-    font-weight: 600;
-    background-color: var(--coquette-pink-light);
-    padding: 2px 6px;
-    border-radius: var(--radius-small);
-}
-
-/* --------------------------------------------------------------------------
-   10. CUSTOMIZAÇÃO DE HORIZONTAL RULES (LINHAS DIVISÓRIAS)
-   Estilizadas para parecerem rendas ou costuras pontilhadas.
-   -------------------------------------------------------------------------- */
-hr {
-    border: none;
-    height: 20px;
-    background-image: radial-gradient(circle, var(--coquette-pink-dark) 2px, transparent 3px);
-    background-size: 15px 15px;
+    background: radial-gradient(circle, var(--cor-rosa-pastel) 10%, transparent 11%);
+    background-size: 12px 12px;
     background-position: center;
-    margin: 50px 0;
-    opacity: 0.6;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-top: 1px solid var(--cor-rosa-pastel);
+    border-bottom: 1px solid var(--cor-rosa-pastel);
+}
+
+.divisor-fita i {
+    background-color: var(--cor-creme-fundo);
+    padding: 0 1rem;
+    animation: pulsaCoracao 1.5s infinite alternate;
 }
 
 /* --------------------------------------------------------------------------
-   11. ELEMENTOS DE CITAÇÃO (BLOCKQUOTES)
-   Estilo diário romântico íntimo.
+   8. SEÇÃO SOBRE E CARDS DE DESTAQUE
    -------------------------------------------------------------------------- */
-blockquote {
-    font-family: var(--font-title);
-    font-style: italic;
-    font-size: 1.4rem;
-    color: var(--text-primary);
-    background-color: var(--coquette-cream);
-    padding: 30px 40px;
-    border-left: 4px solid var(--coquette-rose-deep);
-    border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
-    margin: 30px 0;
+.secao-conteudo h2 {
+    font-size: 2.3rem;
+    text-align: center;
+    margin-bottom: 1rem;
     position: relative;
-    box-shadow: var(--inset-shadow);
 }
 
-blockquote::before {
-    content: "“";
-    font-size: 4rem;
-    color: var(--coquette-pink-main);
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    line-height: 1;
-    font-family: serif;
+/* Detalhe fofo abaixo de cada título H2 */
+.secao-conteudo h2::after {
+    content: '🌸';
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.texto-bloco p {
+    margin-bottom: 1.5rem;
+}
+
+/* Caixa de Destaque Coquette */
+.destaque-box {
+    background-color: white;
+    border: 3px double var(--cor-rosa-principal);
+    border-radius: var(--borda-raio-g);
+    padding: 2.5rem;
+    box-shadow: var(--sombra-card);
+    transition: var(--transicao-suave);
+}
+
+.destaque-box:hover {
+    transform: scale(1.02);
+}
+
+.destaque-box h3 {
+    color: var(--cor-rosa-escuro);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--cor-rosa-pastel);
+    padding-bottom: 0.5rem;
+}
+
+.destaque-box ul {
+    list-style: none;
+}
+
+.destaque-box ul li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.destaque-box ul li i {
+    color: var(--cor-rosa-escuro);
+    font-size: 0.9rem;
 }
 
 /* --------------------------------------------------------------------------
-   12. SEÇÃO 1 E 2: SELETORES ESPECÍFICOS (QUEM SOMOS E HISTÓRIA)
+   9. SEÇÃO PRODUÇÃO ORGÂNICA (CARDS DO GRID)
    -------------------------------------------------------------------------- */
-#quem-somos {
-    background-image: linear-gradient(to bottom right, var(--coquette-white), var(--coquette-cream));
-}
-
-#historia {
-    border: 2px double var(--border-color-soft);
-}
-
-/* --------------------------------------------------------------------------
-   13. SEÇÃO 3: SISTEMA DE GRIDS DOS PILARES
-   Cards detalhados com design coquette simétrico.
-   -------------------------------------------------------------------------- */
-.grid-pilares {
+.grade-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-top: 35px;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
-.pilar-card {
-    background-color: var(--coquette-white);
-    padding: 30px 25px;
-    border-radius: var(--radius-medium);
-    border: 1px solid var(--border-color-soft);
-    box-shadow: 0 4px 12px rgba(255, 204, 213, 0.15);
-    transition: var(--transition-slow);
+.card-coquette {
+    background-color: #ffffff;
+    border-radius: var(--borda-raio-g);
+    padding: 3rem 2rem;
     text-align: center;
+    box-shadow: var(--sombra-card);
+    border: 1px solid rgba(255, 182, 193, 0.3);
     position: relative;
+    transition: var(--transicao-suave);
+    overflow: hidden;
 }
 
-.pilar-card::after {
-    content: "✧";
+/* Fita decorativa no topo do card via CSS */
+.card-coquette::before {
+    content: '';
     position: absolute;
-    bottom: 15px;
-    right: 15px;
-    font-size: 1rem;
-    color: var(--coquette-pink-dark);
-}
-
-.pilar-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--coquette-pink-dark);
-    box-shadow: 0 12px 24px rgba(255, 179, 193, 0.25);
-    background-color: var(--coquette-cream);
-}
-
-.pilar-card h3 {
-    font-family: var(--font-title);
-    color: var(--text-primary);
-    font-size: 1.35rem;
-    margin-top: 0;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--coquette-pink-main);
-}
-
-.pilar-card p {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--text-light);
-    line-height: 1.6;
-    text-align: center;
-    margin-bottom: 0;
-}
-
-/* --------------------------------------------------------------------------
-   14. SEÇÃO 4: LISTAS E DESTAQUES DE PRODUÇÃO E AGROECOLOGIA
-   Customização de marcadores de lista usando caracteres fofos (laços/flores).
-   -------------------------------------------------------------------------- */
-#producao {
-    background-color: var(--coquette-white);
-}
-
-#producao ul {
-    list-style: none;
-    padding-left: 5px;
-    margin-top: 20px;
-}
-
-#producao ul li {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    padding-left: 35px;
-    position: relative;
-    line-height: 1.7;
-}
-
-#producao ul li::before {
-    content: "✿";
-    position: absolute;
-    left: 5px;
-    top: 2px;
-    color: var(--coquette-rose-deep);
-    font-size: 1.1rem;
-    transition: var(--transition-fast);
-}
-
-#producao ul li:hover::before {
-    transform: rotate(45deg) scale(1.2);
-    color: var(--coquette-gold);
-}
-
-#producao ul li strong {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-/* Mesclando a fofura coquette com a agroecologia do MST */
-#producao h3:nth-of-type(1) {
-    color: var(--text-primary);
-    padding: 10px 20px;
-    background-color: var(--mst-green-pastel);
-    border-radius: var(--radius-small);
-    display: inline-block;
-    border: 1px solid var(--mst-green-soft);
-    font-size: 1.3rem;
-}
-
-/* --------------------------------------------------------------------------
-   15. SEÇÃO 5: EDUCAÇÃO E CULTURA NO CAMPO
-   -------------------------------------------------------------------------- */
-#educacao {
-    border: 1px solid rgba(255, 179, 193, 0.4);
-}
-
-#educacao ul {
-    list-style: none;
-    padding-left: 5px;
-}
-
-#educacao ul li {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    margin-bottom: 18px;
-    padding-left: 35px;
-    position: relative;
-}
-
-/* Marcador estilo laço simplificado (ʚɞ) para a educação */
-#educacao ul li::before {
-    content: "ʚɞ";
-    position: absolute;
+    top: 0;
     left: 0;
-    top: -2px;
-    color: var(--coquette-rose-deep);
-    font-size: 1.2rem;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--cor-rosa-principal), var(--cor-verde-claro), var(--cor-rosa-principal));
 }
 
-/* --------------------------------------------------------------------------
-   16. RODAPÉ DO SITE (#main-footer)
-   Visual limpo, acolhedor e em conformidade com as regras do Agrinho.
-   -------------------------------------------------------------------------- */
-#main-footer {
-    background-color: var(--text-primary);
-    color: var(--coquette-pink-light);
-    padding: 45px 0;
-    text-align: center;
-    border-top: 4px solid var(--coquette-pink-dark);
+.card-coquette:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(219, 112, 147, 0.15);
+    border-color: var(--cor-rosa-principal);
+}
+
+.card-icone {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background-color: var(--cor-rosa-suve);
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    border: 2px dashed var(--cor-rosa-principal);
+    transition: var(--transicao-suave);
+}
+
+.card-coquette:hover .card-icone {
+    transform: rotate(360deg);
+    background-color: var(--cor-verde-claro);
+    border-color: var(--cor-verde-folha);
+}
+
+.card-coquette h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--cor-verde-mst);
+}
+
+.card-coquette p {
     font-size: 0.95rem;
-}
-
-#main-footer p {
-    margin-bottom: 10px;
-    font-family: var(--font-body);
-    font-weight: 300;
-    letter-spacing: 0.5px;
-}
-
-#main-footer p:last-child {
+    color: #6b5351;
+    text-align: center;
     margin-bottom: 0;
-    color: var(--coquette-blush);
-    font-size: 0.85rem;
 }
 
 /* --------------------------------------------------------------------------
-   17. ANIMAÇÕES CUSTOMIZADAS (@KEYFRAMES)
-   Animações suaves de surgimento e flutuação romântica.
+   10. SEÇÃO EQUIPE E AVATARES FLORAL
    -------------------------------------------------------------------------- */
-@keyframes coquetteFadeIn {
-    from {
+.grade-equipe {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.membro-equipe {
+    text-align: center;
+    background: white;
+    padding: 2rem 1.5rem;
+    border-radius: var(--borda-raio-m);
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-rosa-suve);
+    transition: var(--transicao-suave);
+}
+
+.membro-equipe:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-suave);
+}
+
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: var(--cor-rosa-suve);
+    border: 3px double var(--cor-rosa-principal);
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transicao-suave);
+}
+
+.membro-equipe:hover .avatar-placeholder {
+    background-color: var(--cor-verde-claro);
+    border-color: var(--cor-verde-folha);
+    transform: scale(1.1);
+}
+
+.membro-equipe h4 {
+    font-family: var(--fonte-titulos);
+    font-size: 1.2rem;
+    color: var(--cor-verde-mst);
+    margin-bottom: 0.3rem;
+}
+
+.membro-equipe p {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cor-terra-suave);
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   11. RODAPÉ DO SITE (FOOTER COQUETTE)
+   -------------------------------------------------------------------------- */
+.footer-coquette {
+    background-color: var(--cor-verde-mst);
+    color: var(--cor-rosa-suve);
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    border-top: 4px solid var(--cor-rosa-principal);
+}
+
+/* Rendinha/Acabamento clássico Coquette no topo do rodapé */
+.footer-coquette::before {
+    content: "••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••";
+    position: absolute;
+    top: -16px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    color: var(--cor-rosa-principal);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    height: 20px;
+}
+
+.footer-coquette p {
+    text-align: center;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.footer-coquette p:last-child {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    color: var(--cor-rosa-pastel);
+}
+
+/* --------------------------------------------------------------------------
+   12. ANIMAÇÕES (KEYFRAMES)
+   -------------------------------------------------------------------------- */
+@keyframes fadeInSuave {
+    0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
-    to {
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes ribbonPulse {
+@keyframes balancoLaco {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(15deg);
+    }
+}
+
+@keyframes pulsaCoracao {
     0% {
         transform: scale(1);
     }
-    50% {
-        transform: scale(1.05);
-    }
     100% {
-        transform: scale(1);
+        transform: scale(1.2);
     }
-}
-
-/* Aplicação inicial de animação na abertura do site */
-#main-header h1 {
-    animation: coquetteFadeIn 1s ease-out;
-}
-
-.content-section {
-    animation: coquetteFadeIn 1.2s ease-out;
 }
 
 /* --------------------------------------------------------------------------
-   18. DESIGN RESPONSIVO (MEDIA QUERIES INTEGRADOS)
-   Garante o layout perfeito em celulares, tablets e telas grandes.
+   13. ACESSIBILIDADE E ACENTOS DE FOCO
    -------------------------------------------------------------------------- */
-
-/* Telas Grandes (Desktops e Notebooks) */
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1170px;
-    }
+.header-coquette nav ul li a:focus,
+.btn-coquette:focus {
+    outline: 3px dashed var(--cor-rosa-escuro);
+    outline-offset: 5px;
 }
 
-/* Notebooks Padrão */
-@media (max-width: 1199px) {
+/* --------------------------------------------------------------------------
+   14. COMPATIBILIDADE E MEDIA QUERIES (RESPONSIVIDADE TOTAL)
+   -------------------------------------------------------------------------- */
+
+/* Dispositivos Grandes (Telas de Laptop) */
+@media (max-width: 1200px) {
     .container {
         max-width: 960px;
     }
-    #main-header h1 {
-        font-size: 2.7rem;
+    .hero-section h1 {
+        font-size: 3rem;
     }
 }
 
-/* Tablets em Modo Paisagem */
-@media (max-width: 991px) {
+/* Tablets e iPads (Telas Médias) */
+@media (max-width: 992px) {
     .container {
         max-width: 720px;
     }
-    #main-header h1 {
-        font-size: 2.4rem;
+    .header-coquette {
+        padding: 1.2rem 2rem;
     }
-    .grid-pilares {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+    .grade-conteudo {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
-    .content-section {
-        padding: 40px 30px;
+    .grade-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .grade-equipe {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .hero-section h1 {
+        font-size: 2.6rem;
     }
 }
 
-/* Tablets em Modo Retrato */
-@media (max-width: 767px) {
+/* Smartphones (Telas Pequenas) */
+@media (max-width: 768px) {
     .container {
-        max-width: 540px;
+        max-width: 100%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
-    #main-header {
-        padding: 40px 0 0 0;
+    .header-coquette {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
     }
-    #main-header h1 {
-        font-size: 2rem;
+    .header-coquette nav ul {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    #main-header .subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 25px;
+    .hero-section {
+        min-height: 70vh;
+        padding-top: 6rem;
     }
-    #main-nav ul {
-        gap: 15px;
+    .hero-section h1 {
+        font-size: 2.1rem;
     }
-    #main-nav ul li a {
-        font-size: 0.85rem;
-        padding: 6px 10px;
+    .hero-section p {
+        font-size: 1.05rem;
     }
-    .grid-pilares {
-        grid-template-columns: 1fr;
-        gap: 15px;
+    .secao-conteudo {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
     }
-    .content-section h2 {
+    .secao-conteudo h2 {
         font-size: 1.8rem;
     }
-    blockquote {
-        font-size: 1.2rem;
-        padding: 20px 25px;
+    .grade-cards {
+        grid-template-columns: 1fr;
+    }
+    .grade-equipe {
+        grid-template-columns: 1fr;
+    }
+    .btn-coquette {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+    }
+    .destaque-box {
+        padding: 1.5rem;
     }
 }
 
-/* Smartphones Grandes */
-@media (max-width: 575px) {
-    .container {
-        padding-right: 15px;
-        padding-left: 15px;
-    }
-    #main-header h1 {
-        font-size: 1.6rem;
-    }
-    #main-nav ul {
-        flex-direction: column;
-        gap: 5px;
-    }
-    .content-section {
-        padding: 25px 20px;
-        border-radius: var(--radius-medium);
-    }
-    .content-section h2 {
-        font-size: 1.5rem;
-    }
-    .content-section p {
-        font-size: 0.95rem;
-    }
-    #producao ul li, #educacao ul li {
-        font-size: 0.95rem;
-        padding-left: 25px;
-    }
-}
-
-/* Smartphones Antigos/Pequenos */
+/* Ajustes finos para celulares muito pequenos (iPhone SE / etc) */
 @media (max-width: 375px) {
-    #main-header h1 {
-        font-size: 1.4rem;
+    .header-coquette .logo span {
+        font-size: 1.1rem;
     }
-    #main-nav ul li a {
-        font-size: 0.75rem;
+    .hero-section h1 {
+        font-size: 1.8rem;
     }
 }
 
-/* FIM DO ARQUIVO CSS */
+/* Otimização para Impressão e Relatórios Finais do Agrinho */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    .header-coquette, .btn-coquette, .divisor-fita {
+        display: none !important;
+    }
+}
